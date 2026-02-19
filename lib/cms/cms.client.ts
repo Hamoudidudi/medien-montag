@@ -10,7 +10,7 @@ const ISSUES: Issue[] = [
   {
     slug: "ausgabe-01",
     title: "Ausgabe 01 – Maui Wowie Trend",
-    dateISO: "2025-12-3",
+    dateISO: "2025-12-03", // 🔥 ISO sauber formatiert
     intro:
       "Ein TikTok-Trend rund um den Sound „Maui Wowie“ von Kid Cudi – was steckt dahinter?",
     coverImageUrl: "/covers/ausgabe-01.png",
@@ -26,6 +26,7 @@ const ISSUES: Issue[] = [
           {
             title: "Song: Maui Wowie – Kid Cudi",
             url: "https://www.youtube.com/",
+            coverImageUrl: "/covers/ausgabe1.png", // ✅ NEU
           },
         ],
         tags: ["Musik"],
@@ -36,12 +37,13 @@ const ISSUES: Issue[] = [
         summary: "Ein einfacher Bewegungs- und Angeb-Trend.",
         content: `
         <ul>
-        <li>An etwas Stabilen hängen (z.B. Straßenschild, Gerüst, Arm eines Freundes).</li>
-        <li>Beine schwingen.</li>
-        <li>Mit dem Sound lipsyncen.</li>
-        <li>Angeben ist angesagt – entweder durch Kulisse (Reisen, Sehenswürdigkeiten) oder körperliche Stärke.</li>
+          <li>An etwas Stabilen hängen (z.B. Straßenschild, Gerüst, Arm eines Freundes).</li>
+          <li>Beine schwingen.</li>
+          <li>Mit dem Sound lipsyncen.</li>
+          <li>Angeben ist angesagt – entweder durch Kulisse (Reisen, Sehenswürdigkeiten) oder körperliche Stärke.</li>
         </ul>
         `,
+       
         sources: [],
         tags: ["TikTok"],
       },
@@ -51,6 +53,7 @@ const ISSUES: Issue[] = [
         summary: "Meist harmlos – aber Vorsicht ist wichtig.",
         content:
           "Grundsätzlich ist der Trend harmlos wie viele andere Dance-Trends. Wichtig ist jedoch, etwas Festes zu finden, woran man hängt. Sonst können Sachschäden oder Verletzungen entstehen.",
+        
         sources: [],
         tags: ["Sicherheit"],
       },
@@ -83,8 +86,11 @@ const ISSUES: Issue[] = [
     ],
   },
 
+
   
 ];
+
+
 
 
 export function getAllIssues(): Issue[] {
@@ -106,4 +112,3 @@ export function getLatestIssue(): Issue | undefined {
   }
   return latest;
 }
-

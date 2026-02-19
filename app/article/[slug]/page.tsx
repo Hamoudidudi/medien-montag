@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import { getAllIssues } from "@/lib/cms";
 import { formatDateDE } from "@/lib/utils/formatDate";
 import FeedbackBar from "@/components/article/FeedbackBar";
+import InfoBox from "@/components/InfoBox";
 
 function getIssueNumber(issue: { slug: string; title?: string }) {
   const match = issue.slug.match(/ausgabe-(\d+)/i);
@@ -55,7 +56,6 @@ export default function ArticlePage() {
     );
   }
 
-  // 🔥 Sortierung nach Ausgaben-Nummer
   const allIssuesSorted = [...getAllIssues()].sort(
     (a, b) => getIssueNumber(a) - getIssueNumber(b)
   );
@@ -72,7 +72,10 @@ export default function ArticlePage() {
   return (
     <>
       <div className="tc-progress-wrap">
-        <div className="tc-progress-bar" style={{ width: `${progress}%` }} />
+        <div
+          className="tc-progress-bar"
+          style={{ height: `${progress}%` }}
+        />
       </div>
 
       <div className="tc-article-wrap">
@@ -85,63 +88,130 @@ export default function ArticlePage() {
 
           <div className="tc-meta">
             <span className="tc-meta-pill">
-               Veröffentlicht am {formatDateDE(issue.dateISO)}
+              Veröffentlicht am {formatDateDE(issue.dateISO)}
             </span>
           </div>
 
           <p className="tc-intro">{issue.intro}</p>
 
-          <div className={`tc-hero ${hasCover ? "tc-hero--img" : "tc-hero--ph"}`}>
-            {hasCover ? (
-              <img className="tc-hero-img" src={issue.coverImageUrl} alt="" />
-            ) : null}
+          <div
+            className={`tc-hero ${
+              hasCover ? "tc-hero--img" : "tc-hero--ph"
+            }`}
+          >
+            {hasCover && (
+              <img
+                className="tc-hero-img"
+                src={issue.coverImageUrl}
+                alt=""
+              />
+            )}
           </div>
 
           {/* ========= SECTIONS ========= */}
           <div className="tc-sections">
             {issue.sections.map((section, idx) => (
-              <section key={section.id} className="tc-section-card">
-                <div className="tc-section-index">{idx + 1}</div>
+              <section
+                key={section.id}
+                className="tc-section-card"
+              >
+                <div className="tc-section-index">
+                  {idx + 1}
+                </div>
 
                 <div className="tc-section-content-wrap">
-                  <h2 className="tc-section-title">{section.title}</h2>
 
-                  {section.summary && (
-                    <p className="tc-section-summary">{section.summary}</p>
-                  )}
-
-                  {looksLikeHtml(section.content) ? (
-                    <div
-                      className="tc-section-content"
-                      dangerouslySetInnerHTML={{
-                        __html: section.content,
-                      }}
-                    />
+                  {/* === CONTENT BLOCK === */}
+                  {section.type === "info" ||
+                  section.type === "warning" ? (
+                    <InfoBox
+                      title={section.title}
+                      type={section.type}
+                    >
+                      {looksLikeHtml(section.content) ? (
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: section.content,
+                          }}
+                        />
+                      ) : (
+                        <p>{section.content}</p>
+                      )}
+                    </InfoBox>
                   ) : (
-                    <p className="tc-section-content">
-                      {section.content}
-                    </p>
+                    <>
+                      <h2 className="tc-section-title">
+                        {section.title}
+                      </h2>
+
+                      {section.summary && (
+                        <p className="tc-section-summary">
+                          {section.summary}
+                        </p>
+                      )}
+
+                      {looksLikeHtml(section.content) ? (
+                        <div
+                          className="tc-section-content"
+                          dangerouslySetInnerHTML={{
+                            __html: section.content,
+                          }}
+                        />
+                      ) : (
+                        <p className="tc-section-content">
+                          {section.content}
+                        </p>
+                      )}
+                    </>
                   )}
 
-                  {section.sources?.length ? (
-                    <div className="tc-sources">
-                      <div className="tc-sources-title">Quellen</div>
-                      <ul className="tc-sources-list">
-                        {section.sources.map((src) => (
-                          <li key={src.url}>
-                            <a
-                              className="tc-link"
-                              href={src.url}
-                              target="_blank"
-                              rel="noreferrer"
-                            >
-                              {src.title}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
+                  {/* === IMAGE GALLERY (IMMER NACH CONTENT) === */}
+                  {section.images?.length ? (
+                    <div className="tc-section-gallery">
+                      {section.images.map((img, i) => (
+                        <img
+                          key={i}
+                          src={img.src}
+                          alt={img.alt ?? ""}
+                          className="tc-section-image"
+                        />
+                      ))}
                     </div>
                   ) : null}
+
+                  {/* === SOURCES === */}
+                  {section.sources?.length ? (
+                    <div className="tc-sources">
+                      <div className="tc-sources-title">
+                        Quellen
+                      </div>
+
+                      <div className="tc-sources-grid">
+                        {section.sources.map((src) => (
+                          <a
+                            key={src.url}
+                            href={src.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="tc-source-card"
+                          >
+                            {src.coverImageUrl && (
+                              <img
+                                src={src.coverImageUrl}
+                                alt={src.title}
+                                className="tc-source-img"
+                              />
+                            )}
+
+                            <div className="tc-source-title">
+                              {src.title}
+                            </div>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
+
                 </div>
               </section>
             ))}
@@ -153,7 +223,10 @@ export default function ArticlePage() {
 
           <div className="tc-nav">
             {prevIssue ? (
-              <Link className="tc-nav-btn" href={`/article/${prevIssue.slug}`}>
+              <Link
+                className="tc-nav-btn"
+                href={`/article/${prevIssue.slug}`}
+              >
                 ← Vorherige Ausgabe
               </Link>
             ) : (
@@ -163,7 +236,10 @@ export default function ArticlePage() {
             )}
 
             {nextIssue ? (
-              <Link className="tc-nav-btn" href={`/article/${nextIssue.slug}`}>
+              <Link
+                className="tc-nav-btn"
+                href={`/article/${nextIssue.slug}`}
+              >
                 Nächste Ausgabe →
               </Link>
             ) : (
@@ -178,6 +254,7 @@ export default function ArticlePage() {
               ← Zurück zum Archiv
             </Link>
           </div>
+
         </article>
       </div>
     </>

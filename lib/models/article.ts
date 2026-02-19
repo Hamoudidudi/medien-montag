@@ -1,13 +1,23 @@
 export type SourceLink = {
-  title: string;      // z.B. "Bundeszentrale für politische Bildung"
-  url: string;        // Quelle
+  title: string;
+  url: string;
+  coverImageUrl?: string;
+};
+
+export type ArticleImage = {
+  src: string;
+  alt?: string;
 };
 
 export type ArticleSection = {
-  id: string;         // interne ID (später vom CMS)
-  title: string;      // Abschnittstitel
-  summary?: string;   // optional: 1–2 Sätze
-  content: string;    // erstmal plain text (später rich text)
+  id: string;
+  title: string;
+  summary: string;
+  content: string;
+
+  type?: "info" | "warning";
+
+  images?: ArticleImage[];
   sources: SourceLink[];
-  tags: string[];     // z.B. ["KI", "TikTok"]
+  tags: string[];
 };
