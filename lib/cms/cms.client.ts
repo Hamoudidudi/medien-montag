@@ -10,7 +10,7 @@ const ISSUES: Issue[] = [
   {
     slug: "ausgabe-01",
     title: "Ausgabe 01 – Maui Wowie Trend",
-    dateISO: "2025-12-03", // 🔥 ISO sauber formatiert
+    dateISO: "2025-12-03",
     intro:
       "Ein TikTok-Trend rund um den Sound „Maui Wowie“ von Kid Cudi – was steckt dahinter?",
     coverImageUrl: "/covers/ausgabe-01.png",
@@ -26,7 +26,7 @@ const ISSUES: Issue[] = [
           {
             title: "Song: Maui Wowie – Kid Cudi",
             url: "https://www.youtube.com/",
-            coverImageUrl: "/covers/ausgabe1.png", // ✅ NEU
+            coverImageUrl: "/covers/ausgabe1.png",
           },
         ],
         tags: ["Musik"],
@@ -40,10 +40,9 @@ const ISSUES: Issue[] = [
           <li>An etwas Stabilen hängen (z.B. Straßenschild, Gerüst, Arm eines Freundes).</li>
           <li>Beine schwingen.</li>
           <li>Mit dem Sound lipsyncen.</li>
-          <li>Angeben ist angesagt – entweder durch Kulisse (Reisen, Sehenswürdigkeiten) oder körperliche Stärke.</li>
+          <li>Angeben ist angesagt – entweder durch Kulisse oder körperliche Stärke.</li>
         </ul>
         `,
-       
         sources: [],
         tags: ["TikTok"],
       },
@@ -53,7 +52,6 @@ const ISSUES: Issue[] = [
         summary: "Meist harmlos – aber Vorsicht ist wichtig.",
         content:
           "Grundsätzlich ist der Trend harmlos wie viele andere Dance-Trends. Wichtig ist jedoch, etwas Festes zu finden, woran man hängt. Sonst können Sachschäden oder Verletzungen entstehen.",
-        
         sources: [],
         tags: ["Sicherheit"],
       },
@@ -86,12 +84,67 @@ const ISSUES: Issue[] = [
     ],
   },
 
-
-  
+  {
+    slug: "ausgabe-03",
+    title: "Ausgabe 03 – Therapy Trend",
+    dateISO: "2025-12-10",
+    intro:
+      "Ein viraler TikTok-Trend, bei dem Natur, Musik und ein überraschender Sturz kombiniert werden – was steckt hinter „Therapy“?",
+    coverImageUrl: "/covers/ausgabe-03.png",
+    tags: ["TikTok", "Trend", "Musik"],
+    sections: [
+      {
+        id: "th-1",
+        title: "Woher kommt der Sound?",
+        summary: "Der Trend nutzt den Song „Kids“ von MGMT.",
+        content:
+          "Der Sound dieses Trends ist der Refrain des Songs „Kids“ von MGMT aus dem Jahr 2008 (Album: Oracular Spectacular). Die Zeilen „Control yourself, take only what you need from it“ begleiten die Videos. Der Song thematisiert Erinnerungen an Kindheit und das Gefühl, im Erwachsenwerden etwas zu verlieren.",
+        sources: [
+          {
+            title: "Song: Kids – MGMT (2008)",
+            url: "https://www.youtube.com/",
+            coverImageUrl: "/covers/ausgabe3.png",
+          },
+        ],
+        tags: ["Musik"],
+      },
+      {
+        id: "th-2",
+        title: "Wie funktioniert der Trend?",
+        summary: "Outdoor-Idylle trifft auf überraschenden Sturz.",
+        content: `
+        <ol>
+          <li>Eine Person läuft oder fährt durch eine beeindruckende Naturkulisse (Berge, Meer, Wald).</li>
+          <li>Eine zweite Person folgt mit der Kamera.</li>
+          <li>Plötzlich wird die vordere Person leicht geschubst oder bekommt ein Bein gestellt.</li>
+          <li>Während des Falls schwenkt die Kamera auf die Umgebung.</li>
+          <li>Oft wird im Video der Text „therapy“ eingeblendet.</li>
+        </ol>
+        `,
+        sources: [],
+        tags: ["TikTok"],
+      },
+      {
+        id: "th-3",
+        title: "Warum sorgt der Trend für Diskussionen?",
+        summary: "Humor oder Risiko?",
+        content:
+          "Kritisch gesehen wird vor allem das Schubsen oder Bein stellen. Wenn der Ort nicht sicher gewählt wird oder der Sturz unkontrolliert ist, kann es zu Verletzungen kommen. Besonders problematisch wird es, wenn Jugendliche den Trend nachmachen, ohne vorher Absprachen zu treffen.",
+        sources: [],
+        tags: ["Sicherheit"],
+      },
+      {
+        id: "th-4",
+        title: "Was ist die eigentliche Botschaft?",
+        summary: "Natur als „Therapie“ – aber ohne Risiko.",
+        content:
+          "Eigentlich soll der Trend zeigen, wie gut Natur und Bewegung der psychischen Gesundheit tun. Statt andere zu schubsen, könnte die Botschaft auch kreativ und ungefährlich umgesetzt werden – zum Beispiel durch ruhige Kamerafahrten oder symbolische Szenen.",
+        sources: [],
+        tags: ["Psychische Gesundheit"],
+      },
+    ],
+  },
 ];
-
-
-
 
 export function getAllIssues(): Issue[] {
   return ISSUES;
