@@ -22,7 +22,7 @@ export default function AboutPage() {
             was sie bedeuten oder welche Hintergründe sie haben.
           </p>
           <p>
-            Medien Morgen möchte genau das tun:
+            Medien Montag möchte genau das tun:
             erklären statt bewerten.
           </p>
         </section>
