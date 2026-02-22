@@ -8,7 +8,7 @@ export default function AboutPage() {
         <header className="tc-about-hero">
           <h1>Was ist Medien Montag?</h1>
           <p className="tc-about-intro">
-            Medien Morgen erklärt Internet-Trends verständlich,
+            Medien Montag erklärt Internet-Trends verständlich,
             neutral und ohne Hype. 
             
           </p>
